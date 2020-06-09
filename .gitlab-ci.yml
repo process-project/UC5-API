@@ -1,0 +1,36 @@
+stages:
+  - lint
+  - static_check
+  - unit_tests
+
+python_unittest:
+  image: "python:latest"
+  stage: unit_tests
+  script:
+    - pip install --upgrade pip
+    - python setup.py install
+    - python -m unittest discover test
+  only:
+    - merge_request
+
+pylint:
+  image: "python:latest"
+  stage: lint
+  script:
+    - pip install --upgrade pip
+    - python setup.py install
+    - pip install pylint
+    - pylint papi
+  only:
+    - merge_request
+
+mypy:
+  image: "python:latest"
+  stage: static_check
+  script:
+    - pip install --upgrade pip
+    - python setup.py install
+    - pip install mypy
+    - mypy -p papi --ignore-missing-imports
+  only:
+    - merge_request
