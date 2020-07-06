@@ -86,7 +86,7 @@ class Submit(Resource):
             raise exception
         return task.id
 
-    @jwt_required
+    #@jwt_required
     def post(self):
         """Executed on HTTP POST send to API Endpoint /submit/
 

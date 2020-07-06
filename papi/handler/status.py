@@ -60,7 +60,7 @@ class Status(Resource):
             status = 'failed'
         return status, status_message
 
-    @jwt_required
+    #@jwt_required
     def get(self, task_id: int):
         """Executed on HTTP GET send to API Endpoint /status/<id>
 
