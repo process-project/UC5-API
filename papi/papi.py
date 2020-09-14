@@ -15,7 +15,6 @@ from flask_jwt_extended import JWTManager
 from .db.viwa_db import ViwaDb
 from .ssh import Ssh
 from .async_runner import AsyncRunner
-
 class Papi:
     """A single instance of the API
 
@@ -45,7 +44,7 @@ class Papi:
         self.runner.run()
 
     def __jwt(self):
-        self.app.config['JWT_PUBLIC_KEY'] = self.open_pub_key(self.config['HTTP']['JWT_SECRET_KEY'])
+        self.app.config['JWT_PUBLIC_KEY'] = self.open_pub_key(self.config['BASE_DIR'] + self.config['HTTP']['JWT_SECRET_KEY'])
         self.app.config['JWT_ALGORITHM'] = self.config['HTTP']['JWT_ALGORITHM']
         self.app.config['JWT_IDENTITY_CLAIM'] = self.config['HTTP']['JWT_CLAIM']
         return JWTManager(self.app)

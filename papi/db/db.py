@@ -47,9 +47,10 @@ class DB:
 
     def __init__(self, config: ImmutableDict):
         self.config = config
-        self.db_file = self.config['FILENAME']
-        self.session = self.__session()
         self.logger = logging.getLogger('papi.db')
+        self.db_file = self.config['BASE_DIR'] + self.config['FILENAME']
+        self.logger.info(f'Opening db File {self.db_file}')
+        self.session = self.__session()
 
     def __session(self):
         engine = create_engine(f'sqlite:////{self.db_file}', echo=False)

@@ -10,7 +10,6 @@ with open(activate_this) as f:
     exec(code, dict(__file__=activate_this))
 
 sys.path.append(CONFIG['PAPI']['BASE_DIR'])
-
 from papi.papi import Papi
 from papi.handler import Status, Submit
 PAPI = Papi(CONFIG)
